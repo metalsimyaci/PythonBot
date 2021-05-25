@@ -1,11 +1,12 @@
 from bs4 import BeautifulSoup
-import urllib.request
+#import urllib.request
+from urllib.request import urlopen
 import re
 
 
 def GetUrls():
     sitemap_path = "http://mabushimajo.com/sitemap.xml"
-    url_oku = urllib.request.urlopen(sitemap_path)
+    url_oku = urlopen(sitemap_path)
     soup = BeautifulSoup(url_oku, "html.parser")
     locs = []
     for loc in soup.find_all('loc'):
@@ -38,7 +39,7 @@ def not_mabushimajo(href):
 
 def searcher(furl):
     f = open('kayitlar.txt', 'a')
-    url_oku = urllib.request.urlopen(furl)
+    url_oku = urlopen(furl)
     soup = BeautifulSoup(url_oku, 'html.parser')
     searc_result = soup.find_all('a', href=not_mabushimajo)
     f.write('Taranan Sayfa:' + furl + '\n')
